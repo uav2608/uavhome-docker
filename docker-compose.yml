@@ -25,20 +25,20 @@ services:
       - TZ=${TZ}
     networks:
       - uavhanet
-      - traefik_proxy
+#      - traefik_proxy
 #      - default
     labels:
       - "traefik.enable=true"
       - "traefik.backend=homeassistant"
       - "traefik.frontend.rule=Host:hass.${DOMAINNAME}"
       - "traefik.port=8122"
-      - "traefik.docker.network=traefik_proxy"
+      - "traefik.docker.network=docker_uavhanet"
       - "traefik.frontend.headers.SSLRedirect=true"
       - "traefik.frontend.headers.STSSeconds=315360000"
       - "traefik.frontend.headers.browserXSSFilter=true"
       - "traefik.frontend.headers.contentTypeNosniff=true"
       - "traefik.frontend.headers.forceSTSHeader=true"
-      - "traefik.frontend.headers.SSLHost=example.com"
+      - "traefik.frontend.headers.SSLHost=uavhome.club"
       - "traefik.frontend.headers.STSIncludeSubdomains=true"
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
@@ -63,7 +63,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.backend=portainer"
-      - "traefik.frontend.rule=Host:portainer.${DOMAINNAME}"  
+      - "traefik.frontend.rule=Host:portainer.${DOMAINNAME}" 
 #      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /portainer"
       - "traefik.port=9000"
       - "traefik.docker.network=traefik_proxy"
@@ -72,7 +72,7 @@ services:
       - "traefik.frontend.headers.browserXSSFilter=true"
       - "traefik.frontend.headers.contentTypeNosniff=true"
       - "traefik.frontend.headers.forceSTSHeader=true"
-      - "traefik.frontend.headers.SSLHost=example.com"
+      - "traefik.frontend.headers.SSLHost=uavhome.club"
       - "traefik.frontend.headers.STSIncludeSubdomains=true"
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
@@ -93,26 +93,26 @@ services:
       - TZ=${TZ}
     networks:
       - uavhanet
-      - traefik_proxy
+#      - traefik_proxy
     labels:
       - "traefik.enable=true"
       - "traefik.backend=organizr"
-      - "traefik.frontend.rule=Host:organizr.${DOMAINNAME}"  
+      - "traefik.frontend.rule=Host:organizr.${DOMAINNAME}" 
 #      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /organizr"
       - "traefik.port=80"
-      - "traefik.docker.network=traefik_proxy"
+      - "traefik.docker.network=docker_uavhanet"
       - "traefik.frontend.headers.SSLRedirect=true"
       - "traefik.frontend.headers.STSSeconds=315360000"
       - "traefik.frontend.headers.browserXSSFilter=true"
       - "traefik.frontend.headers.contentTypeNosniff=true"
       - "traefik.frontend.headers.forceSTSHeader=true"
-      - "traefik.frontend.headers.SSLHost=example.com"
+      - "traefik.frontend.headers.SSLHost=uavhome.club"
       - "traefik.frontend.headers.STSIncludeSubdomains=true"
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
 
 # phpMyAdmin - WebUI for MariaDB
-phpmyadmin:
+  phpmyadmin:
     hostname: phpmyadmin
     container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin
@@ -126,20 +126,20 @@ phpmyadmin:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     networks:
       - uavhanet
-      - traefik_proxy
+#      - traefik_proxy
 #      - default
     labels:
       - "traefik.enable=true"
       - "traefik.backend=pma"
       - "traefik.frontend.rule=Host:pma.${DOMAINNAME}"
       - "traefik.port=80"
-      - "traefik.docker.network=traefik_proxy"
+      - "traefik.docker.network=docker_uavhanet"
       - "traefik.frontend.headers.SSLRedirect=true"
       - "traefik.frontend.headers.STSSeconds=315360000"
       - "traefik.frontend.headers.browserXSSFilter=true"
       - "traefik.frontend.headers.contentTypeNosniff=true"
       - "traefik.frontend.headers.forceSTSHeader=true"
-      - "traefik.frontend.headers.SSLHost=example.com"
+      - "traefik.frontend.headers.SSLHost=uavhome.club"
       - "traefik.frontend.headers.STSIncludeSubdomains=true"
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
@@ -167,7 +167,7 @@ phpmyadmin:
     labels:
       - "traefik.enable=true"
       - "traefik.backend=traefik"
-      - "traefik.frontend.rule=Host:traefik.${DOMAINNAME}"  
+      - "traefik.frontend.rule=Host:traefik.${DOMAINNAME}" 
 #      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /traefik"
       - "traefik.port=8080"
       - "traefik.docker.network=traefik_proxy"
@@ -176,7 +176,7 @@ phpmyadmin:
       - "traefik.frontend.headers.browserXSSFilter=true"
       - "traefik.frontend.headers.contentTypeNosniff=true"
       - "traefik.frontend.headers.forceSTSHeader=true"
-      - "traefik.frontend.headers.SSLHost=example.com"
+      - "traefik.frontend.headers.SSLHost=uavhome.club"
       - "traefik.frontend.headers.STSIncludeSubdomains=true"
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
@@ -196,7 +196,7 @@ phpmyadmin:
     command: --schedule "0 0 4 * * *" --cleanup
     networks:
       - uavhanet
-      - traefik_proxy
+#      - traefik_proxy
 
 # MariaDB – Database Server for your Apps
   mariadb:
@@ -204,7 +204,7 @@ phpmyadmin:
     container_name: "mariadb"
     hostname: mariadb
     volumes:
-        - ${USERDIR}/docker/uavmariadb:/config
+      - ${USERDIR}/docker/uavmariadb:/config
     ports:
       - target: 3306
         published: 3306
@@ -233,20 +233,20 @@ phpmyadmin:
       - PGID=${PGID}
     networks:
       - uavhanet
-      - traefik_proxy
+#      - traefik_proxy
     labels:
       - "traefik.enable=true"
       - "traefik.backend=nextcloud"
       - "traefik.frontend.rule=Host:nextcloud.${DOMAINNAME}"
       - "traefik.port=443"
       - "traefik.protocol=https"
-      - "traefik.docker.network=traefik_proxy"
+      - "traefik.docker.network=docker_uavhanet"
       - "traefik.frontend.headers.SSLRedirect=true"
       - "traefik.frontend.headers.STSSeconds=315360000"
       - "traefik.frontend.headers.browserXSSFilter=true"
       - "traefik.frontend.headers.contentTypeNosniff=true"
       - "traefik.frontend.headers.forceSTSHeader=true"
-      - "traefik.frontend.headers.SSLHost=example.com"
+      - "traefik.frontend.headers.SSLHost=uavhome.club"
       - "traefik.frontend.headers.STSIncludeSubdomains=true"
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
